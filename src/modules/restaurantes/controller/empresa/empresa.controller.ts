@@ -1,7 +1,10 @@
-import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Delete, UseInterceptors, UploadedFiles, UploadedFile, Res } from '@nestjs/common';
 import { Empresa } from '../../../../model/Empresa';
 import { EmpresaProvider } from '../../provider/empresa.provider';
-import { RegEmpresa } from '../../../../../dist/dto/RegEmpresa';
+import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
+import { RegEmpresa } from '../../../../dto/request/RegEmpresa';
+import { editFileName, imageFileFilter } from '../../../../utils/file-upload.utils';
+import { diskStorage } from 'multer';
 
 @Controller('empresa')
 export class EmpresaController {
@@ -30,5 +33,28 @@ export class EmpresaController {
     @Delete(':id')
     remove(@Param('id') id: string): Promise<void> {
       return this.empresaProvider.remove(id);
+    }
+
+    @Post('upload/:id/:tipo')
+    @UseInterceptors(
+      FileInterceptor('image', {
+        storage: diskStorage({
+          destination: './upload',
+          filename: editFileName,
+        }),
+        fileFilter: imageFileFilter,
+      }),
+    )
+    uploadFile(@UploadedFile() file, @Param('id') id: string, @Param('tipo') tipo: string) {
+      console.log(file);
+      const response = {
+        originalname: file.originalname,
+        filename: file.filename,
+      };
+      return response;
+    }
+    @Get(':imgpath')
+    seeUploadedFile(@Param('imgpath') image, @Res() res) {
+      return res.sendFile(image, { root: './files' });
     }
 }

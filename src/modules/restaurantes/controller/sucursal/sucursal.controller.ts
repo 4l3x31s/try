@@ -25,4 +25,6 @@ export class SucursalController {
     remove(@Param('id') id: string): Promise<void> {
       return this.sucursalProvider.remove(id);
     }
+    
+    
 }

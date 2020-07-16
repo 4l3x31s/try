@@ -1,6 +1,8 @@
+import { ResponseCiudades } from './../../../../dto/response/ResponseCiudadesPais';
 import { Ciudad } from './../../../../model/Ciudad';
 import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
 import { CiudadProvider } from '../../provider/ciudad.provider';
+
 
 @Controller('ciudad')
 export class CiudadController {
@@ -16,13 +18,19 @@ export class CiudadController {
       return this.ciudadProvider.findAll();
     }
   
-    @Get(':id')
+    @Get('buscar/:id')
     findOne(@Param('id') id: string): Promise<Ciudad> {
       return this.ciudadProvider.findOne(id);
     }
   
-    @Delete(':id')
+    @Delete('eliminar/:id')
     remove(@Param('id') id: string): Promise<void> {
       return this.ciudadProvider.remove(id);
+    }
+
+    @Get('prueba/alex')
+    findAllCiudades(): Promise<ResponseCiudades[]>{
+
+      return this.ciudadProvider.findAllCiudades();
     }
 }

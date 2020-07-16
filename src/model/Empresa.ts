@@ -1,6 +1,13 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  Index,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Sucursal } from "./Sucursal";
 
+@Index("UK_empresa_nit", ["nit"], { unique: true })
 @Entity("empresa", { schema: "restaurantes" })
 export class Empresa {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
@@ -9,7 +16,7 @@ export class Empresa {
   @Column("varchar", { name: "razon_social", length: 150 })
   razonSocial: string;
 
-  @Column("varchar", { name: "nit", length: 50 })
+  @Column("varchar", { name: "nit", unique: true, length: 50 })
   nit: string;
 
   @Column("datetime", { name: "fecha_registro" })

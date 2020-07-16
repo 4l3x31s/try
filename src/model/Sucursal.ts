@@ -7,6 +7,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { FotoSucursal } from "./FotoSucursal";
 import { Horario } from "./Horario";
 import { Menu } from "./Menu";
 import { Reserva } from "./Reserva";
@@ -65,6 +66,9 @@ export class Sucursal {
 
   @Column("tinyint", { name: "estado", width: 1 })
   estado: boolean;
+
+  @OneToMany(() => FotoSucursal, (fotoSucursal) => fotoSucursal.idSucursal2)
+  fotoSucursals: FotoSucursal[];
 
   @OneToMany(() => Horario, (horario) => horario.idSucursal2)
   horarios: Horario[];

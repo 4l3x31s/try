@@ -1,7 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  Index,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Reserva } from "./Reserva";
 import { Sucursal } from "./Sucursal";
 
+@Index("UK_usuario_correo", ["correo", "celular"], { unique: true })
 @Entity("usuario", { schema: "restaurantes" })
 export class Usuario {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })

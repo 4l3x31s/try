@@ -28,6 +28,10 @@ import { SucursalController } from './controller/sucursal/sucursal.controller';
 import { UsuarioProvider } from './provider/usuario.provider';
 import { UsuarioController } from './controller/usuario/usuario.controller';
 import { LoginController } from './auth/login/login.controller';
+import { FotosSucursalController } from './controller/fotos-sucursal/fotos-sucursal.controller';
+import { FotosSucursalProvider } from './provider/fotos-sucursal.provider';
+import { FotoSucursal } from '../../model/FotoSucursal';
+
 
 @Module({
   imports:[
@@ -40,7 +44,8 @@ import { LoginController } from './auth/login/login.controller';
       Pais,
       Reserva,
       Sucursal,
-      Usuario
+      Usuario,
+      FotoSucursal
     ])
   ],
   providers: [
@@ -52,7 +57,8 @@ import { LoginController } from './auth/login/login.controller';
     MenuProvider,
     ReservaProvider,
     SucursalProvider,
-    UsuarioProvider
+    UsuarioProvider,
+    FotosSucursalProvider,
   ],
   controllers: [
     PaisController,
@@ -64,7 +70,8 @@ import { LoginController } from './auth/login/login.controller';
     ReservaController,
     SucursalController,
     UsuarioController,
-    LoginController
+    LoginController,
+    FotosSucursalController
   ]
 })
 export class RestaurantesModule {}
