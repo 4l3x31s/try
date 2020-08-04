@@ -45,6 +45,26 @@ export class CiudadProvider {
             console.log(err);
             return err;
         }
-        
     }
+    async findCiudadesByPais(idPais: number): Promise<Ciudad[]>{
+        try{
+            console.log('prueba')
+            const connection = getConnection();
+            const queryRunner = connection.createQueryRunner();
+            await queryRunner.connect();
+            let prueba:any = await queryRunner.query(`SELECT ci.* FROM ciudad ci, pais pa
+                                WHERE ci.id_pais = pa.id
+                                AND ci.estado = TRUE
+                                AND pa.id = ${idPais}
+                                AND pa.estado = TRUE`).then(data =>{
+                                    return data;
+                                });
+            console.log(prueba);
+            return prueba;
+        }catch(err){
+            console.log(err);
+            return err;
+        }
+    }
+
 }

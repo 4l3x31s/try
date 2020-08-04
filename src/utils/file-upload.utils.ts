@@ -18,5 +18,5 @@ export const editFileName = (req, file, callback) => {
   console.log(name);
   console.log(randomName);
   console.log(fileExtName);
-  callback(null, `${name}-${randomName}${fileExtName}`);
+  callback(null, `${randomName}${fileExtName}`);
 };

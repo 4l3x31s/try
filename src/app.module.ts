@@ -9,7 +9,7 @@ import { RestaurantesModule } from './modules/restaurantes/restaurantes.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '192.168.1.10',
+      host: '192.168.1.200',
       port: 3306,
       username: 'alexeis',
       password: 'Al3x31s123$',
@@ -20,7 +20,7 @@ import { RestaurantesModule } from './modules/restaurantes/restaurantes.module';
     }),
     RestaurantesModule,
     MulterModule.register({
-      dest: '/uploads',
+      dest: '/files',
     }),
   ],
   controllers: [AppController],

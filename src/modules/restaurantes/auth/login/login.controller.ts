@@ -15,7 +15,7 @@ export class LoginController {
        
         ) {}
     @Post('login')
-    async create(@Body() loginDto: Login): Promise<ResponseLogin> {
+    async iniciaSesion(@Body() loginDto: Login): Promise<ResponseLogin> {
         let respuesta: ResponseLogin = <ResponseLogin>{};
         try{
             let user: Usuario = await this.usuarioProvider.login(loginDto.correo, loginDto.pass);

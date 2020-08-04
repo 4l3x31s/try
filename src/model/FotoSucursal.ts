@@ -20,6 +20,9 @@ export class FotoSucursal {
   @Column("text", { name: "imagen" })
   imagen: string;
 
+  @Column("int", { name: "tipo" })
+  tipo: number;
+
   @ManyToOne(() => Sucursal, (sucursal) => sucursal.fotoSucursals, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",

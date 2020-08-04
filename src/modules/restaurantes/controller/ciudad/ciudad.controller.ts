@@ -27,6 +27,10 @@ export class CiudadController {
     remove(@Param('id') id: string): Promise<void> {
       return this.ciudadProvider.remove(id);
     }
+    @Get('pais/:id')
+    findCiudadesByPais(@Param('id') idPais: number): Promise<Ciudad[]>{
+      return this.ciudadProvider.findCiudadesByPais(idPais);
+    }
 
     @Get('prueba/alex')
     findAllCiudades(): Promise<ResponseCiudades[]>{

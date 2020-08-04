@@ -8,7 +8,7 @@ import {
 import { Reserva } from "./Reserva";
 import { Sucursal } from "./Sucursal";
 
-@Index("UK_usuario_correo", ["correo", "celular"], { unique: true })
+@Index("UK_usuario_correo", ["celular", "correo"], { unique: true })
 @Entity("usuario", { schema: "restaurantes" })
 export class Usuario {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
@@ -25,6 +25,9 @@ export class Usuario {
 
   @Column("varchar", { name: "pass", length: 150 })
   pass: string;
+
+  @Column("int", { name: "valor" })
+  valor: number;
 
   @Column("datetime", { name: "fecha_registro" })
   fechaRegistro: Date;

@@ -25,6 +25,10 @@ export class SucursalController {
     remove(@Param('id') id: string): Promise<void> {
       return this.sucursalProvider.remove(id);
     }
-    
+
+    @Get('ciudad/:id')
+    findSucursalesPorCiudad(@Param('id') idCiudad: number): Promise<Sucursal[]> {
+      return this.sucursalProvider.findSucursalCiudad(idCiudad);
+    }
     
 }

@@ -35,26 +35,5 @@ export class EmpresaController {
       return this.empresaProvider.remove(id);
     }
 
-    @Post('upload/:id/:tipo')
-    @UseInterceptors(
-      FileInterceptor('image', {
-        storage: diskStorage({
-          destination: './upload',
-          filename: editFileName,
-        }),
-        fileFilter: imageFileFilter,
-      }),
-    )
-    uploadFile(@UploadedFile() file, @Param('id') id: string, @Param('tipo') tipo: string) {
-      console.log(file);
-      const response = {
-        originalname: file.originalname,
-        filename: file.filename,
-      };
-      return response;
-    }
-    @Get(':imgpath')
-    seeUploadedFile(@Param('imgpath') image, @Res() res) {
-      return res.sendFile(image, { root: './files' });
-    }
+    
 }

@@ -28,7 +28,7 @@ export class UsuarioProvider {
 
     async login(correo:string, pass:string): Promise<Usuario> {
         // return await this.usuarioRepository.query(`SELECT USUARIO FROM USUARIO U WHERE U.USUARIO= $1 AND U.PASS = $2`, [usuario, pass]);
-        return await this.usuarioRepository.findOne({correo:correo, pass: pass, estado: true}, {select:['nombre', 'celular', 'id']});
+        return await this.usuarioRepository.findOne({correo:correo, pass: pass, estado: true}, {select:['nombre', 'celular', 'id', 'valor']});
     }
 
 }
