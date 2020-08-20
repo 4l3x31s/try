@@ -4,6 +4,7 @@ import { Repository, getConnection } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Sucursal } from '../../../model/Sucursal';
 import { RegEmpresa } from '../../../dto/request/RegEmpresa';
+import { Usuario } from '../../../model/Usuario';
 
 
 @Injectable()
@@ -30,7 +31,19 @@ export class EmpresaProvider {
         await this.empresaRepository.delete(id);
     }
 
-    async regEmpresa(empresa: Empresa, sucursal: Sucursal): Promise<RegEmpresa> {
+    async regEmpresa(empresa: Empresa, sucursal: Sucursal, usuario: Usuario): Promise<RegEmpresa> {
+
+        let fecha: Date = new Date();
+        usuario.fechaRegistro = fecha;
+        usuario.valor = 2;
+        usuario.estado = true;
+
+        sucursal.fechaRegistro = fecha;
+        sucursal.estado = true;
+
+        empresa.fechaRegistro = fecha;
+        empresa.estado = true;
+
         let resp:RegEmpresa = <RegEmpresa>{};
         const connection = getConnection();
         const queryRunner = connection.createQueryRunner();
@@ -50,7 +63,13 @@ export class EmpresaProvider {
         try {
             const empresaRepository = queryRunner.manager.getRepository(Empresa);
             const sucursalRepository = queryRunner.manager.getRepository(Sucursal);
+            const usuarioRepository = queryRunner.manager.getRepository(Usuario);
             // execute some operations on this transaction:
+
+            let usuario2: Usuario = await usuarioRepository.save(usuario);
+            console.log(usuario2);
+            sucursal.idUsuario = usuario2.id;
+
             let empresa2: Empresa = await empresaRepository.save(empresa);
             console.log(empresa2);
             sucursal.idEmpresa = empresa2.id;

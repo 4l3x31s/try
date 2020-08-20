@@ -31,6 +31,15 @@ import { LoginController } from './auth/login/login.controller';
 import { FotosSucursalController } from './controller/fotos-sucursal/fotos-sucursal.controller';
 import { FotosSucursalProvider } from './provider/fotos-sucursal.provider';
 import { FotoSucursal } from '../../model/FotoSucursal';
+import { EmpresaRrss } from '../../model/EmpresaRrss';
+import { MenuReserva } from '../../model/MenuReserva';
+import { RedesSociales } from '../../model/RedesSociales';
+import { RedesSocialesController } from './controller/redes-sociales/redes-sociales.controller';
+import { EmpresaRssController } from './controller/empresa-rss/empresa-rss.controller';
+import { MenuReservaController } from './controller/menu-reserva/menu-reserva.controller';
+import { RedesSocialesProvider } from './provider/redes-sociales.provider';
+import { EmpresaRrssProvider } from './provider/empresa-rrss.provider';
+import { MenuReservaProvider } from './provider/menu-reserva.provider';
 
 
 @Module({
@@ -45,7 +54,10 @@ import { FotoSucursal } from '../../model/FotoSucursal';
       Reserva,
       Sucursal,
       Usuario,
-      FotoSucursal
+      FotoSucursal,
+      EmpresaRrss,
+      MenuReserva,
+      RedesSociales
     ])
   ],
   providers: [
@@ -59,6 +71,10 @@ import { FotoSucursal } from '../../model/FotoSucursal';
     SucursalProvider,
     UsuarioProvider,
     FotosSucursalProvider,
+    RedesSocialesProvider,
+    EmpresaRrssProvider,
+    MenuReservaProvider,
+    
   ],
   controllers: [
     PaisController,
@@ -71,7 +87,10 @@ import { FotoSucursal } from '../../model/FotoSucursal';
     SucursalController,
     UsuarioController,
     LoginController,
-    FotosSucursalController
+    FotosSucursalController,
+    RedesSocialesController,
+    EmpresaRssController,
+    MenuReservaController
   ]
 })
 export class RestaurantesModule {}

@@ -25,4 +25,9 @@ export class ReservaController {
     remove(@Param('id') id: string): Promise<void> {
       return this.reservaProvider.remove(id);
     }
+    //listarReservasDia
+    @Get('sucursal/:id')
+    findSucursal(@Param('id') id: string): Promise<Reserva[]> {
+      return this.reservaProvider.listarReservasDia(id);
+    }
 }

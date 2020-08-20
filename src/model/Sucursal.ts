@@ -20,7 +20,7 @@ import { Usuario } from "./Usuario";
 @Index("IXFK_sucursal_ciudad", ["idCiudad"], {})
 @Index("IXFK_sucursal_empresa", ["idEmpresa"], {})
 @Index("IXFK_sucursal_usuario", ["idUsuario"], {})
-@Entity("sucursal", { schema: "restaurantes" })
+@Entity("sucursal", { schema: "try" })
 export class Sucursal {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -80,29 +80,29 @@ export class Sucursal {
   reservas: Reserva[];
 
   @ManyToOne(() => Categoria, (categoria) => categoria.sucursals, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_categoria", referencedColumnName: "id" }])
   idCategoria2: Categoria;
 
   @ManyToOne(() => Ciudad, (ciudad) => ciudad.sucursals, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_ciudad", referencedColumnName: "id" }])
   idCiudad2: Ciudad;
 
   @ManyToOne(() => Empresa, (empresa) => empresa.sucursals, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_empresa", referencedColumnName: "id" }])
   idEmpresa2: Empresa;
 
   @ManyToOne(() => Usuario, (usuario) => usuario.sucursals, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_usuario", referencedColumnName: "id" }])
   idUsuario2: Usuario;

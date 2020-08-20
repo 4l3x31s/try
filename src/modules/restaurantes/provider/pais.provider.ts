@@ -16,7 +16,7 @@ export class PaisProvider {
     }
     
     async findAll(): Promise<Pais[]> {
-        return this.paisRepository.find();
+        return this.paisRepository.find({estado:true});
     }
     
     findOne(id: string): Promise<Pais> {

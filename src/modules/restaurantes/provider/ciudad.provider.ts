@@ -16,8 +16,8 @@ export class CiudadProvider {
         return this.ciudadRepository.save(ciudad);
     }
     
-    async findAll(): Promise<Ciudad[]> {
-        return this.ciudadRepository.find();
+    findAll(): Promise<Ciudad[]> {
+        return this.ciudadRepository.find({estado: true});
     }
     
     findOne(id: string): Promise<Ciudad> {
@@ -48,19 +48,7 @@ export class CiudadProvider {
     }
     async findCiudadesByPais(idPais: number): Promise<Ciudad[]>{
         try{
-            console.log('prueba')
-            const connection = getConnection();
-            const queryRunner = connection.createQueryRunner();
-            await queryRunner.connect();
-            let prueba:any = await queryRunner.query(`SELECT ci.* FROM ciudad ci, pais pa
-                                WHERE ci.id_pais = pa.id
-                                AND ci.estado = TRUE
-                                AND pa.id = ${idPais}
-                                AND pa.estado = TRUE`).then(data =>{
-                                    return data;
-                                });
-            console.log(prueba);
-            return prueba;
+            return this.ciudadRepository.find({ estado: true, idPais: idPais });
         }catch(err){
             console.log(err);
             return err;

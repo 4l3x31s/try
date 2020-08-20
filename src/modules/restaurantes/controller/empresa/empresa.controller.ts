@@ -17,7 +17,7 @@ export class EmpresaController {
     @Post('first')
     createFirst(@Body() empresaDto: RegEmpresa): Promise<RegEmpresa> {
         console.log(empresaDto);
-      return this.empresaProvider.regEmpresa(empresaDto.empresa, empresaDto.sucursal);
+      return this.empresaProvider.regEmpresa(empresaDto.empresa, empresaDto.sucursal, empresaDto.usuario);
     }
   
     @Get()
@@ -28,6 +28,7 @@ export class EmpresaController {
     @Get(':id')
     findOne(@Param('id') id: string): Promise<Empresa> {
       return this.empresaProvider.findOne(id);
+      
     }
   
     @Delete(':id')

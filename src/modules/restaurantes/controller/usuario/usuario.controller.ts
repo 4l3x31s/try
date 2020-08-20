@@ -8,7 +8,15 @@ export class UsuarioController {
 
     @Post()
     create(@Body() usuarioDto: Usuario): Promise<Usuario> {
+      try {
+        usuarioDto.estado = true;
+        usuarioDto.fechaRegistro = new Date();
+        usuarioDto.valor = 1;
       return this.usuarioProvider.create(usuarioDto);
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
     }
   
     @Get()
@@ -24,6 +32,15 @@ export class UsuarioController {
     @Delete(':id')
     remove(@Param('id') id: string): Promise<void> {
       return this.usuarioProvider.remove(id);
+    }
+
+    @Get('buscar/correo/:correo')
+    findCorreo(@Param('correo') correo: string): Promise<Usuario> {
+      return this.usuarioProvider.findCorreo(correo);
+    }
+    @Get('buscar/celular/:celular')
+    findCelular(@Param('celular') celular: string): Promise<Usuario> {
+      return this.usuarioProvider.findCelular(celular);
     }
 
     

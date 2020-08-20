@@ -14,12 +14,12 @@ export class CategoriaProvider {
         return this.categoriaRepository.save(categoria);
     }
     
-    async findAll(): Promise<Categoria[]> {
-        return this.categoriaRepository.find();
+    findAll(): Promise<Categoria[]> {
+        return this.categoriaRepository.find({estado: true});
     }
     
     findOne(id: string): Promise<Categoria> {
-        return this.categoriaRepository.findOne(id);
+        return this.categoriaRepository.findOne(id, {where: {estado: true}});
     }
     
     async remove(id: string): Promise<void> {

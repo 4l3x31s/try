@@ -8,8 +8,10 @@ import {
 import { Reserva } from "./Reserva";
 import { Sucursal } from "./Sucursal";
 
-@Index("UK_usuario_correo", ["celular", "correo"], { unique: true })
-@Entity("usuario", { schema: "restaurantes" })
+@Index("UK_correo", ["correo"], { unique: true })
+@Index("UK_usuario_correo", ["correo", "celular"], { unique: true })
+@Index("UK_celular", ["celular"], { unique: true })
+@Entity("usuario", { schema: "try" })
 export class Usuario {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -17,10 +19,15 @@ export class Usuario {
   @Column("varchar", { name: "nombre", length: 250 })
   nombre: string;
 
-  @Column("varchar", { name: "celular", nullable: true, length: 50 })
+  @Column("varchar", {
+    name: "celular",
+    nullable: true,
+    unique: true,
+    length: 50,
+  })
   celular: string | null;
 
-  @Column("varchar", { name: "correo", length: 250 })
+  @Column("varchar", { name: "correo", unique: true, length: 250 })
   correo: string;
 
   @Column("varchar", { name: "pass", length: 150 })

@@ -5,10 +5,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { EmpresaRrss } from "./EmpresaRrss";
 import { Sucursal } from "./Sucursal";
 
 @Index("UK_empresa_nit", ["nit"], { unique: true })
-@Entity("empresa", { schema: "restaurantes" })
+@Entity("empresa", { schema: "try" })
 export class Empresa {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -24,6 +25,9 @@ export class Empresa {
 
   @Column("tinyint", { name: "estado", width: 1 })
   estado: boolean;
+
+  @OneToMany(() => EmpresaRrss, (empresaRrss) => empresaRrss.idEmpresa2)
+  empresaRrsses: EmpresaRrss[];
 
   @OneToMany(() => Sucursal, (sucursal) => sucursal.idEmpresa2)
   sucursals: Sucursal[];

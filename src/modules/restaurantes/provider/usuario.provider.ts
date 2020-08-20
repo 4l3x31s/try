@@ -11,7 +11,13 @@ export class UsuarioProvider {
     ) {}
     
     create(usuario: Usuario): Promise<Usuario> {
-        return this.usuarioRepository.save(usuario);
+        try {
+            usuario.fechaRegistro = new Date();
+            return this.usuarioRepository.save(usuario);
+        } catch (error) {
+            return error;
+        }
+        
     }
     
     async findAll(): Promise<Usuario[]> {
@@ -20,6 +26,13 @@ export class UsuarioProvider {
     
     async findOne(id: string): Promise<Usuario> {
         return await this.usuarioRepository.findOne(id);
+    }
+    async findCorreo(correo: string): Promise<Usuario> {
+        return await this.usuarioRepository.findOne({where: {correo: correo}});
+    }
+
+    async findCelular(celular: string): Promise<Usuario> {
+        return await this.usuarioRepository.findOne({where: {celular: celular}});
     }
     
     async remove(id: string): Promise<void> {

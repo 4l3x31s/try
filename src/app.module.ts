@@ -8,13 +8,15 @@ import { RestaurantesModule } from './modules/restaurantes/restaurantes.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
+      connectTimeout  : 60 * 60 * 2000,
+      acquireTimeout  : 60 * 60 * 2000,
       type: 'mysql',
-      host: '192.168.1.200',
+      host: 'localhost',
       port: 3306,
-      username: 'alexeis',
-      password: 'Al3x31s123$',
-      database: 'restaurantes',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      username: 'try',
+      password: 'sasa',
+      database: 'try',
+      entities: [__dirname + '/model/**/*{.ts,.js}'],
       synchronize: false,
       autoLoadEntities: true,
     }),
@@ -26,4 +28,9 @@ import { RestaurantesModule } from './modules/restaurantes/restaurantes.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(){
+    console.log(__dirname + '/model/**/*{.ts,.js}');
+  }
+  
+}

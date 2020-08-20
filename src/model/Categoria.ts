@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Sucursal } from "./Sucursal";
 
-@Entity("categoria", { schema: "restaurantes" })
+@Entity("categoria", { schema: "try" })
 export class Categoria {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;

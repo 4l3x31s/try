@@ -9,7 +9,7 @@ import {
 import { Sucursal } from "./Sucursal";
 
 @Index("IXFK_foto_sucursal_sucursal", ["idSucursal"], {})
-@Entity("foto_sucursal", { schema: "restaurantes" })
+@Entity("foto_sucursal", { schema: "try" })
 export class FotoSucursal {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -24,8 +24,8 @@ export class FotoSucursal {
   tipo: number;
 
   @ManyToOne(() => Sucursal, (sucursal) => sucursal.fotoSucursals, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_sucursal", referencedColumnName: "id" }])
   idSucursal2: Sucursal;

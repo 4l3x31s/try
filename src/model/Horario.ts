@@ -9,7 +9,7 @@ import {
 import { Sucursal } from "./Sucursal";
 
 @Index("IXFK_horario_sucursal", ["idSucursal"], {})
-@Entity("horario", { schema: "restaurantes" })
+@Entity("horario", { schema: "try" })
 export class Horario {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -33,8 +33,8 @@ export class Horario {
   estado: boolean;
 
   @ManyToOne(() => Sucursal, (sucursal) => sucursal.horarios, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_sucursal", referencedColumnName: "id" }])
   idSucursal2: Sucursal;

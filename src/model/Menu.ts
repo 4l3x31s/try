@@ -4,12 +4,14 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Sucursal } from "./Sucursal";
+import { MenuReserva } from "./MenuReserva";
 
 @Index("IXFK_Menu_sucursal", ["idSucursal"], {})
-@Entity("menu", { schema: "restaurantes" })
+@Entity("menu", { schema: "try" })
 export class Menu {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -30,9 +32,12 @@ export class Menu {
   estado: boolean;
 
   @ManyToOne(() => Sucursal, (sucursal) => sucursal.menus, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_sucursal", referencedColumnName: "id" }])
   idSucursal2: Sucursal;
+
+  @OneToMany(() => MenuReserva, (menuReserva) => menuReserva.idMenu2)
+  menuReservas: MenuReserva[];
 }

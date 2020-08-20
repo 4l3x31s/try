@@ -11,7 +11,7 @@ import { Pais } from "./Pais";
 import { Sucursal } from "./Sucursal";
 
 @Index("IXFK_ciudad_pais", ["idPais"], {})
-@Entity("ciudad", { schema: "restaurantes" })
+@Entity("ciudad", { schema: "try" })
 export class Ciudad {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
@@ -26,8 +26,8 @@ export class Ciudad {
   estado: boolean;
 
   @ManyToOne(() => Pais, (pais) => pais.ciudads, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "id_pais", referencedColumnName: "id" }])
   idPais2: Pais;

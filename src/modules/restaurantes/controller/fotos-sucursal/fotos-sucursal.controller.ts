@@ -50,7 +50,7 @@ export class FotosSucursalController {
         idSucursal: id,
         imagen: file.filename,
         tipo: tipo
-      } 
+      };
       return this.fotoSucursalProvider.create(fotoSucursal);
     }
     @Get('archivos/:imgpath')

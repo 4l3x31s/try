@@ -30,5 +30,10 @@ export class SucursalController {
     findSucursalesPorCiudad(@Param('id') idCiudad: number): Promise<Sucursal[]> {
       return this.sucursalProvider.findSucursalCiudad(idCiudad);
     }
+    @Get('usuario/:id')
+    findSucursalesPorUsuario(@Param('id') idUsuario: string): Promise<Sucursal[]> {
+      return this.sucursalProvider.findSucursalUsuario(idUsuario);
+    }
+
     
 }
