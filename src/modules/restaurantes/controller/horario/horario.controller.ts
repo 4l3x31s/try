@@ -20,9 +20,14 @@ export class HorarioController {
     findOne(@Param('id') id: string): Promise<Horario> {
       return this.horarioProvider.findOne(id);
     }
+    @Get('sucursal/:id')
+    findBySucursal(@Param('id') id: string): Promise<Horario[]> {
+      return this.horarioProvider.lstHorarioSucursal(id);
+    }
   
     @Delete(':id')
     remove(@Param('id') id: string): Promise<void> {
+      console.log(id);
       return this.horarioProvider.remove(id);
     }
 }

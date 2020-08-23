@@ -1,10 +1,14 @@
 {
   "name": "reserva-ya-back",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Prueba Servicios AppEngine",
+  "author": "Alexeis Carrillo",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "main": "dist/main.js",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -22,6 +26,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^7.0.0",
+    "@nestjs/config": "^0.5.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/swagger": "^4.5.12",

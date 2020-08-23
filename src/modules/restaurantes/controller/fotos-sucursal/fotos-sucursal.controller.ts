@@ -5,6 +5,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from '../../../../utils/file-upload.utils';
 
+import * as fs from 'fs';
+import * as path from 'path';
+
 @Controller('fotos-sucursal')
 export class FotosSucursalController {
     constructor(private readonly fotoSucursalProvider: FotosSucursalProvider) {}
@@ -23,6 +26,11 @@ export class FotosSucursalController {
     findOne(@Param('id') id: string): Promise<FotoSucursal> {
       return this.fotoSucursalProvider.findOne(id);
     }
+
+    @Get('sucursal/:id')
+    findBySucursal(@Param('id') id: string): Promise<FotoSucursal[]> {
+      return this.fotoSucursalProvider.findBySucursal(id);
+    }
   
     @Delete(':id')
     remove(@Param('id') id: string): Promise<void> {
@@ -33,13 +41,13 @@ export class FotosSucursalController {
     @UseInterceptors(
       FileInterceptor('image', {
         storage: diskStorage({
-          destination: './files',
+          destination: __dirname + '../../../../../files',
           filename: editFileName,
         }),
         fileFilter: imageFileFilter,
       }),
     )
-    uploadFile(@UploadedFile() file, @Param('id') id: string, @Param('tipo') tipo: number): Promise<FotoSucursal> {
+    async uploadFile(@UploadedFile() file, @Param('id') id: string, @Param('tipo') tipo: number): Promise<FotoSucursal> {
       console.log(file);
       const response = {
         originalname: file.originalname,
@@ -51,10 +59,21 @@ export class FotosSucursalController {
         imagen: file.filename,
         tipo: tipo
       };
+      let lstFotoSucursal: FotoSucursal[] = await this.fotoSucursalProvider.findBySucursal(id);
+      for (const iterator of lstFotoSucursal) {
+        fs.unlink(__dirname + '../../../../../files/' + iterator.imagen, err => {
+          console.log(err);
+        });
+        await this.fotoSucursalProvider.remove(iterator.id);
+      }
       return this.fotoSucursalProvider.create(fotoSucursal);
     }
-    @Get('archivos/:imgpath')
-    seeUploadedFile(@Param('imgpath') image, @Res() res) {
-      return res.sendFile(image, { root: './files' });
+
+    
+    @Get('archivos/:sucursal')
+    async seeUploadedFile(@Param('sucursal') sucursal: string, @Res() res) {
+      let lstFotoSucursal: FotoSucursal[] = await this.fotoSucursalProvider.findBySucursal(sucursal);
+      let dir = __dirname + '../../../../../files';
+      return res.sendFile(lstFotoSucursal[0].imagen , { root: dir });
     }
 }

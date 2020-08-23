@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { Reserva } from '../../../model/Reserva';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getConnection, MoreThan } from 'typeorm';
+import { Repository, getConnection, MoreThan, LessThan, Between } from 'typeorm';
 import { MenuReserva } from '../../../model/MenuReserva';
 import { ResponseGlobal } from '../../../dto/response/ResponseGlobal';
 import moment = require('moment');
@@ -42,11 +42,20 @@ export class ReservaProvider {
     listarReservasDia(idSucursal: string): Promise<Reserva[]>{
         console.log(__dirname);
         let fechaActual = moment();
-        console.log(fechaActual.format('HH:MM'));
+        console.log(fechaActual.format('HH:mm'));
         return this.reservaRepository.find(
             {
-                relations: ['MenuReserva'],
-                where: {idSucursal: idSucursal, estado: 1, fecha: fechaActual.format('YYYY-MM-DD'), hora: MoreThan(fechaActual.format('HH:MM')) }, 
+                where: {idSucursal: idSucursal, estado: 1, fecha: fechaActual.format('YYYY-MM-DD'), hora: MoreThan(fechaActual.add(-2,'h').format('HH:mm')) }, 
+                order:{hora:'ASC'}, 
+            });
+    }
+    listarReservasFecha(idSucursal: string,fechaInicio: string, fechaFin: string): Promise<Reserva[]>{
+        console.log(__dirname);
+        let fechaIn = moment(fechaInicio);
+        let fechaFi = moment(fechaFin);
+        return this.reservaRepository.find(
+            {
+                where: {idSucursal: idSucursal, estado: 1, fecha: Between(fechaIn.format('YYYY-MM-DD'), fechaFi.format('YYYY-MM-DD')) }, 
                 order:{hora:'ASC'}, 
             });
     }

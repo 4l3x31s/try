@@ -1,6 +1,7 @@
 import { Controller, Post, Body, Get, Delete, Param } from '@nestjs/common';
 import { CategoriaProvider } from '../../provider/categoria.provider';
-import { Categoria } from 'src/model/Categoria';
+import { Categoria } from '../../../../model/Categoria';
+
 
 @Controller('categoria')
 export class CategoriaController {

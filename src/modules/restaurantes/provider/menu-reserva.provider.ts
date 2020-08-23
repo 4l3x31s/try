@@ -21,6 +21,9 @@ export class MenuReservaProvider {
     findOne(id: string): Promise<MenuReserva> {
         return this.menuReservaRepository.findOne(id);
     }
+    async findByReserva(idReserva: string): Promise<MenuReserva[]> {
+        return this.menuReservaRepository.find({where: {idReserva: idReserva}});
+    }
     
     async remove(id: string): Promise<void> {
         await this.menuReservaRepository.delete(id);

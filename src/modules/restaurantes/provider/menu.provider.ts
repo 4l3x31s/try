@@ -15,7 +15,11 @@ export class MenuProvider {
     }
     
     async findAll(): Promise<Menu[]> {
-        return this.menuRepository.find();
+        return this.menuRepository.find({estado: true});
+    }
+
+    async findBySucursal(idSucursal: string): Promise<Menu[]> {
+        return this.menuRepository.find({idSucursal: idSucursal, estado: true});
     }
     
     findOne(id: string): Promise<Menu> {

@@ -30,4 +30,9 @@ export class ReservaController {
     findSucursal(@Param('id') id: string): Promise<Reserva[]> {
       return this.reservaProvider.listarReservasDia(id);
     }
+    //listarReservasFecha
+    @Get('sucursal/fecha/:id/:fechaIn/:fechaFi')
+    listarSucursalesFecha(@Param('id') id: string,@Param('fechaIn') fechaIn: string, @Param('fechaFi') fechaFi: string): Promise<Reserva[]> {
+      return this.reservaProvider.listarReservasFecha(id, fechaIn, fechaFi);
+    }
 }

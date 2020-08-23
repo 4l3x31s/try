@@ -7,7 +7,6 @@ import { Ciudad } from '../../model/Ciudad';
 import { Empresa } from '../../model/Empresa';
 import { Horario } from '../../model/Horario';
 import { Menu } from '../../model/Menu';
-import { Pais } from 'src/model/Pais';
 import { Reserva } from '../../model/Reserva';
 import { Sucursal } from '../../model/Sucursal';
 import { Usuario } from '../../model/Usuario';
@@ -40,10 +39,12 @@ import { MenuReservaController } from './controller/menu-reserva/menu-reserva.co
 import { RedesSocialesProvider } from './provider/redes-sociales.provider';
 import { EmpresaRrssProvider } from './provider/empresa-rrss.provider';
 import { MenuReservaProvider } from './provider/menu-reserva.provider';
+import { Pais } from '../../model/Pais';
 
 
 @Module({
   imports:[
+    
     TypeOrmModule.forFeature([
       Categoria,
       Ciudad,

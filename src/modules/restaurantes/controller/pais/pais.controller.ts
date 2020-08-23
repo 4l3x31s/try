@@ -1,6 +1,6 @@
 import { Controller, Post, Get, Delete, Param, Body } from '@nestjs/common';
 import { PaisProvider } from '../../provider/pais.provider';
-import { Pais } from 'src/model/Pais';
+import { Pais } from '../../../../model/Pais';
 
 @Controller('pais')
 export class PaisController {

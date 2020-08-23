@@ -1,6 +1,7 @@
 import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
 import { RedesSocialesProvider } from '../../provider/redes-sociales.provider';
-import { RedesSociales } from 'src/model/RedesSociales';
+import { RedesSociales } from '../../../../model/RedesSociales';
+
 
 @Controller('redes-sociales')
 export class RedesSocialesController {

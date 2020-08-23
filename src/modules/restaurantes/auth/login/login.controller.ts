@@ -20,9 +20,9 @@ export class LoginController {
         try{
             let user: Usuario = await this.usuarioProvider.login(loginDto.correo, loginDto.pass);
             if(user){
-                let sucursal: Sucursal[] = await this.sucursalProvider.findSucursalUsuario(user.id);
+                let sucursal: Sucursal = await this.sucursalProvider.findSucursalUsuario(user.id);
                 console.log(sucursal);
-                if(sucursal.length > 0){
+                if(sucursal){
                     respuesta.sucursal = sucursal;
                 }
                 respuesta.usuario = user;

@@ -26,4 +26,7 @@ export class FotosSucursalProvider {
     async remove(id: string): Promise<void> {
         await this.menuRepository.delete(id);
     }
+    async findBySucursal(idSucursal: string): Promise<FotoSucursal[]> {
+        return this.menuRepository.find({idSucursal: idSucursal});
+    }
 }

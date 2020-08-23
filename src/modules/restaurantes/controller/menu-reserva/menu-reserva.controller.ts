@@ -25,4 +25,10 @@ export class MenuReservaController {
     remove(@Param('id') id: string): Promise<void> {
       return this.menuReservaProvider.remove(id);
     }
+
+    @Get('reserva/:id')
+    findByReserva(@Param('id') id: string): Promise<MenuReserva[]> {
+      console.log(id);
+      return this.menuReservaProvider.findByReserva(id);
+    }
 }

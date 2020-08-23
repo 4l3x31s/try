@@ -21,6 +21,10 @@ export class HorarioProvider {
     findOne(id: string): Promise<Horario> {
         return this.horarioRepository.findOne(id);
     }
+
+    async lstHorarioSucursal(idSucursal: string): Promise<Horario[]> {
+        return this.horarioRepository.find({idSucursal: idSucursal});
+    }
     
     async remove(id: string): Promise<void> {
         await this.horarioRepository.delete(id);
