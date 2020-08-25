@@ -41,7 +41,7 @@ export class FotosSucursalController {
     @UseInterceptors(
       FileInterceptor('image', {
         storage: diskStorage({
-          destination: __dirname + '../../../../../files',
+          destination: __dirname + '../../../../../../files',
           filename: editFileName,
         }),
         fileFilter: imageFileFilter,
@@ -61,7 +61,7 @@ export class FotosSucursalController {
       };
       let lstFotoSucursal: FotoSucursal[] = await this.fotoSucursalProvider.findBySucursal(id);
       for (const iterator of lstFotoSucursal) {
-        fs.unlink(__dirname + '../../../../../files/' + iterator.imagen, err => {
+        fs.unlink(__dirname + '../../../../../../files/' + iterator.imagen, err => {
           console.log(err);
         });
         await this.fotoSucursalProvider.remove(iterator.id);
@@ -73,7 +73,7 @@ export class FotosSucursalController {
     @Get('archivos/:sucursal')
     async seeUploadedFile(@Param('sucursal') sucursal: string, @Res() res) {
       let lstFotoSucursal: FotoSucursal[] = await this.fotoSucursalProvider.findBySucursal(sucursal);
-      let dir = __dirname + '../../../../../files';
+      let dir = __dirname + '../../../../../../files';
       return res.sendFile(lstFotoSucursal[0].imagen , { root: dir });
     }
 }

@@ -40,7 +40,7 @@ export class MenuController {
     @UseInterceptors(
       FileInterceptor('image', {
         storage: diskStorage({
-          destination: __dirname + '../../../../../files/menu',
+          destination: __dirname + '../../../../../../files/menu',
           filename: editFileName,
         }),
         fileFilter: imageFileFilter,
@@ -55,7 +55,7 @@ export class MenuController {
       //TODO: tipo 1= sucursal, 2= menu, 3= avatar
       let menu: Menu = await this.menuProvider.findOne(idMenu);
       if(menu.imagen){
-        fs.unlink(__dirname + '../../../../../../menu' + menu.imagen, err => {
+        fs.unlink(__dirname + '../../../../../../../menu' + menu.imagen, err => {
           console.log(err);
         });
       }
@@ -67,7 +67,7 @@ export class MenuController {
     @Get('archivos/:idMenu')
     async seeUploadedFile(@Param('idMenu') idMenu: string, @Res() res) {
       let menu: Menu = await this.menuProvider.findOne(idMenu);
-      let dir = __dirname + '../../../../../files/menu';
+      let dir = __dirname + '../../../../../../files/menu';
       return res.sendFile(menu.imagen , { root: dir });
     }
 }

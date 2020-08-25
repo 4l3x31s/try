@@ -1,6 +1,8 @@
+import { ResponseGlobal } from './../../../../dto/response/ResponseGlobal';
 import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
 import { ReservaProvider } from '../../provider/reserva.provider';
 import { Reserva } from '../../../../model/Reserva';
+import { RegReserva } from '../../../../dto/request/RegReserva';
 
 @Controller('reserva')
 export class ReservaController {
@@ -19,6 +21,11 @@ export class ReservaController {
     @Get(':id')
     findOne(@Param('id') id: string): Promise<Reserva> {
       return this.reservaProvider.findOne(id);
+    }
+
+    @Post('registro')
+    registrarMenuReserva(@Body() reservaDto: RegReserva): Promise<ResponseGlobal> {
+      return this.reservaProvider.registraReserva(reservaDto.reserva, reservaDto.lstMenuReserva );
     }
   
     @Delete(':id')

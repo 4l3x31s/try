@@ -63,7 +63,8 @@ export class ReservaProvider {
         let resp:ResponseGlobal = <ResponseGlobal>{};
         const connection = getConnection();
         const queryRunner = connection.createQueryRunner();
-
+        reserva.estado = 1;
+        reserva.fechaRegistro = new Date();
         // establish real database connection using our new query runner
         await queryRunner.connect();
 
@@ -85,6 +86,7 @@ export class ReservaProvider {
             if(menuReserva) {
                 if(menuReserva.length > 0){
                     for(let item of menuReserva) {
+                        item.idReserva = empresa2.id;
                         //insertamos a menu reserva
                         await sucursalRepository.save(item);
                     }
