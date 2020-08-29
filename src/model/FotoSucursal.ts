@@ -1,15 +1,7 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Sucursal } from "./Sucursal";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("IXFK_foto_sucursal_sucursal", ["idSucursal"], {})
-@Entity("foto_sucursal", { schema: "try" })
+@Entity("foto_sucursal", { schema: "lhwzrcxi_try_bolivia" })
 export class FotoSucursal {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -22,11 +14,4 @@ export class FotoSucursal {
 
   @Column("int", { name: "tipo" })
   tipo: number;
-
-  @ManyToOne(() => Sucursal, (sucursal) => sucursal.fotoSucursals, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "id_sucursal", referencedColumnName: "id" }])
-  idSucursal2: Sucursal;
 }

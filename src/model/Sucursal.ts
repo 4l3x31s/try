@@ -1,26 +1,10 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { FotoSucursal } from "./FotoSucursal";
-import { Horario } from "./Horario";
-import { Menu } from "./Menu";
-import { Reserva } from "./Reserva";
-import { Categoria } from "./Categoria";
-import { Ciudad } from "./Ciudad";
-import { Empresa } from "./Empresa";
-import { Usuario } from "./Usuario";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("IXFK_sucursal_categoria", ["idCategoria"], {})
 @Index("IXFK_sucursal_ciudad", ["idCiudad"], {})
 @Index("IXFK_sucursal_empresa", ["idEmpresa"], {})
 @Index("IXFK_sucursal_usuario", ["idUsuario"], {})
-@Entity("sucursal", { schema: "try" })
+@Entity("sucursal", { schema: "lhwzrcxi_try_bolivia" })
 export class Sucursal {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -66,44 +50,4 @@ export class Sucursal {
 
   @Column("tinyint", { name: "estado", width: 1 })
   estado: boolean;
-
-  @OneToMany(() => FotoSucursal, (fotoSucursal) => fotoSucursal.idSucursal2)
-  fotoSucursals: FotoSucursal[];
-
-  @OneToMany(() => Horario, (horario) => horario.idSucursal2)
-  horarios: Horario[];
-
-  @OneToMany(() => Menu, (menu) => menu.idSucursal2)
-  menus: Menu[];
-
-  @OneToMany(() => Reserva, (reserva) => reserva.idSucursal2)
-  reservas: Reserva[];
-
-  @ManyToOne(() => Categoria, (categoria) => categoria.sucursals, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "id_categoria", referencedColumnName: "id" }])
-  idCategoria2: Categoria;
-
-  @ManyToOne(() => Ciudad, (ciudad) => ciudad.sucursals, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "id_ciudad", referencedColumnName: "id" }])
-  idCiudad2: Ciudad;
-
-  @ManyToOne(() => Empresa, (empresa) => empresa.sucursals, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "id_empresa", referencedColumnName: "id" }])
-  idEmpresa2: Empresa;
-
-  @ManyToOne(() => Usuario, (usuario) => usuario.sucursals, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "id_usuario", referencedColumnName: "id" }])
-  idUsuario2: Usuario;
 }

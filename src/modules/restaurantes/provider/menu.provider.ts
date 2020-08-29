@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Menu } from '../../../model/Menu';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, IsNull, Not } from 'typeorm';
 
 @Injectable()
 export class MenuProvider {
@@ -20,6 +20,9 @@ export class MenuProvider {
 
     async findBySucursal(idSucursal: string): Promise<Menu[]> {
         return this.menuRepository.find({idSucursal: idSucursal, estado: true});
+    }
+    async findBySucursalImage(idSucursal: string): Promise<Menu[]> {
+        return this.menuRepository.find({idSucursal: idSucursal, estado: true, imagen: Not(IsNull())});
     }
     
     findOne(id: string): Promise<Menu> {

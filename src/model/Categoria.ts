@@ -1,7 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Sucursal } from "./Sucursal";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("categoria", { schema: "try" })
+@Entity("categoria", { schema: "lhwzrcxi_try_bolivia" })
 export class Categoria {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
@@ -11,7 +10,4 @@ export class Categoria {
 
   @Column("tinyint", { name: "estado", width: 1 })
   estado: boolean;
-
-  @OneToMany(() => Sucursal, (sucursal) => sucursal.idCategoria2)
-  sucursals: Sucursal[];
 }

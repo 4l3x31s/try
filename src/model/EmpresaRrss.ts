@@ -1,10 +1,8 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
-import { Empresa } from "./Empresa";
-import { RedesSociales } from "./RedesSociales";
+import { Column, Entity, Index } from "typeorm";
 
 @Index("IXFK_empresa_rrss_empresa", ["idEmpresa"], {})
 @Index("IXFK_empresa_rrss_redes_sociales", ["idRrss"], {})
-@Entity("empresa_rrss", { schema: "try" })
+@Entity("empresa_rrss", { schema: "lhwzrcxi_try_bolivia" })
 export class EmpresaRrss {
   @Column("bigint", { primary: true, name: "id" })
   id: string;
@@ -20,19 +18,4 @@ export class EmpresaRrss {
 
   @Column("tinyint", { name: "estado", width: 1 })
   estado: boolean;
-
-  @ManyToOne(() => Empresa, (empresa) => empresa.empresaRrsses, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "id_empresa", referencedColumnName: "id" }])
-  idEmpresa2: Empresa;
-
-  @ManyToOne(
-    () => RedesSociales,
-    (redesSociales) => redesSociales.empresaRrsses,
-    { onDelete: "NO ACTION", onUpdate: "NO ACTION" }
-  )
-  @JoinColumn([{ name: "id_rrss", referencedColumnName: "id" }])
-  idRrss2: RedesSociales;
 }

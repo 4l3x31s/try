@@ -1,19 +1,8 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { MenuReserva } from "./MenuReserva";
-import { Sucursal } from "./Sucursal";
-import { Usuario } from "./Usuario";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("IXFK_reserva_sucursal", ["idSucursal"], {})
 @Index("IXFK_reserva_usuario", ["idUsuario"], {})
-@Entity("reserva", { schema: "try" })
+@Entity("reserva", { schema: "lhwzrcxi_try_bolivia" })
 export class Reserva {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -41,21 +30,4 @@ export class Reserva {
 
   @Column("int", { name: "estado" })
   estado: number;
-
-  @OneToMany(() => MenuReserva, (menuReserva) => menuReserva.idReserva2)
-  menuReservas: MenuReserva[];
-
-  @ManyToOne(() => Sucursal, (sucursal) => sucursal.reservas, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "id_sucursal", referencedColumnName: "id" }])
-  idSucursal2: Sucursal;
-
-  @ManyToOne(() => Usuario, (usuario) => usuario.reservas, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "id_usuario", referencedColumnName: "id" }])
-  idUsuario2: Usuario;
 }

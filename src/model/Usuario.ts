@@ -1,17 +1,9 @@
-import {
-  Column,
-  Entity,
-  Index,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Reserva } from "./Reserva";
-import { Sucursal } from "./Sucursal";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("UK_correo", ["correo"], { unique: true })
 @Index("UK_usuario_correo", ["correo", "celular"], { unique: true })
 @Index("UK_celular", ["celular"], { unique: true })
-@Entity("usuario", { schema: "try" })
+@Entity("usuario", { schema: "lhwzrcxi_try_bolivia" })
 export class Usuario {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -41,10 +33,4 @@ export class Usuario {
 
   @Column("tinyint", { name: "estado", width: 1 })
   estado: boolean;
-
-  @OneToMany(() => Reserva, (reserva) => reserva.idUsuario2)
-  reservas: Reserva[];
-
-  @OneToMany(() => Sucursal, (sucursal) => sucursal.idUsuario2)
-  sucursals: Sucursal[];
 }

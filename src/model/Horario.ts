@@ -1,15 +1,7 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Sucursal } from "./Sucursal";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("IXFK_horario_sucursal", ["idSucursal"], {})
-@Entity("horario", { schema: "try" })
+@Entity("horario", { schema: "lhwzrcxi_try_bolivia" })
 export class Horario {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -23,19 +15,9 @@ export class Horario {
   @Column("time", { name: "hora_cierre" })
   horaCierre: string;
 
-  @Column("int", { name: "tipo_horario" })
-  tipoHorario: number;
-
   @Column("varchar", { name: "dias", length: 50 })
   dias: string;
 
   @Column("tinyint", { name: "estado", width: 1 })
   estado: boolean;
-
-  @ManyToOne(() => Sucursal, (sucursal) => sucursal.horarios, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "id_sucursal", referencedColumnName: "id" }])
-  idSucursal2: Sucursal;
 }

@@ -1,17 +1,7 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Sucursal } from "./Sucursal";
-import { MenuReserva } from "./MenuReserva";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("IXFK_Menu_sucursal", ["idSucursal"], {})
-@Entity("menu", { schema: "try" })
+@Entity("menu", { schema: "lhwzrcxi_try_bolivia" })
 export class Menu {
   @PrimaryGeneratedColumn({ type: "bigint", name: "id" })
   id: string;
@@ -19,7 +9,7 @@ export class Menu {
   @Column("bigint", { name: "id_sucursal" })
   idSucursal: string;
 
-  @Column("varchar", { name: "nombre", length: 256 })
+  @Column("varchar", { name: "nombre", length: 250 })
   nombre: string;
 
   @Column("varchar", { name: "descripcion", length: 250 })
@@ -33,14 +23,4 @@ export class Menu {
 
   @Column("tinyint", { name: "estado", width: 1 })
   estado: boolean;
-
-  @ManyToOne(() => Sucursal, (sucursal) => sucursal.menus, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "id_sucursal", referencedColumnName: "id" }])
-  idSucursal2: Sucursal;
-
-  @OneToMany(() => MenuReserva, (menuReserva) => menuReserva.idMenu2)
-  menuReservas: MenuReserva[];
 }

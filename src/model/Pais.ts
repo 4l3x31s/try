@@ -1,7 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Ciudad } from "./Ciudad";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("pais", { schema: "try" })
+@Entity("pais", { schema: "lhwzrcxi_try_bolivia" })
 export class Pais {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
@@ -14,7 +13,4 @@ export class Pais {
 
   @Column("tinyint", { name: "estado", width: 1 })
   estado: boolean;
-
-  @OneToMany(() => Ciudad, (ciudad) => ciudad.idPais2)
-  ciudads: Ciudad[];
 }

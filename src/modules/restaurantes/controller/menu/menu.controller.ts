@@ -25,6 +25,10 @@ export class MenuController {
     findBySucursal(@Param('id') id: string): Promise<Menu[]> {
       return this.menuProvider.findBySucursal(id);
     }
+    @Get('sucursal/image/:id')
+    findBySucursalImage(@Param('id') id: string): Promise<Menu[]> {
+      return this.menuProvider.findBySucursal(id);
+    }
   
     @Get(':id')
     findOne(@Param('id') id: string): Promise<Menu> {

@@ -1,17 +1,7 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Pais } from "./Pais";
-import { Sucursal } from "./Sucursal";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("IXFK_ciudad_pais", ["idPais"], {})
-@Entity("ciudad", { schema: "try" })
+@Entity("ciudad", { schema: "lhwzrcxi_try_bolivia" })
 export class Ciudad {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
@@ -24,14 +14,4 @@ export class Ciudad {
 
   @Column("tinyint", { name: "estado", width: 1 })
   estado: boolean;
-
-  @ManyToOne(() => Pais, (pais) => pais.ciudads, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "id_pais", referencedColumnName: "id" }])
-  idPais2: Pais;
-
-  @OneToMany(() => Sucursal, (sucursal) => sucursal.idCiudad2)
-  sucursals: Sucursal[];
 }

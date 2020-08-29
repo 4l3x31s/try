@@ -1,7 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { EmpresaRrss } from "./EmpresaRrss";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("redes_sociales", { schema: "try" })
+@Entity("redes_sociales", { schema: "lhwzrcxi_try_bolivia" })
 export class RedesSociales {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
@@ -11,7 +10,4 @@ export class RedesSociales {
 
   @Column("tinyint", { name: "estado", width: 1 })
   estado: boolean;
-
-  @OneToMany(() => EmpresaRrss, (empresaRrss) => empresaRrss.idRrss2)
-  empresaRrsses: EmpresaRrss[];
 }
